@@ -1,21 +1,17 @@
+import { useState } from "react";
 import Experience from "./components/Experience.jsx";
 import Education from "./components/Education.jsx";
 import GeneralInfo from "./components/GeneralInfo.jsx";
-import { useState } from "react";
 import initialUserData from "./data/initialUserData.js";
 import PreviewPrevSection from "./components/PreviewSection.jsx";
+import PreviewData from "./model/PreviewData.js";
+import "./styles/App.css";
 
 function App() {
   const [userData, setUserData] = useState(initialUserData);
   const [status, setStatus] = useState("filling");
 
-  class PreviewData {
-    constructor(label, value) {
-      this.id = crypto.randomUUID();
-      this.label = label;
-      this.value = value;
-    }
-  }
+
 
   function handleControlChange(data) {
     setUserData(data);
@@ -44,11 +40,41 @@ function App() {
 
   const experienceData = [
     new PreviewData("Company Name", userData["companyName"]),
-    new PreviewData("Position Title", userData["PositionTitle"]),
+    new PreviewData("Position Title", userData["positionTitle"]),
     new PreviewData("Responsibilities", userData["responsibilities"]),
     new PreviewData("From", userData["from"]),
     new PreviewData("Until", userData["until"]),
   ];
+
+  const previewArea = (
+    <>
+      <PreviewPrevSection theme="General Information" data={generalData} />
+
+      <PreviewPrevSection theme="Education Experience" data={educationData} />
+
+      <PreviewPrevSection theme="Practical Experience" data={experienceData} />
+
+      <button onClick={handleEdit} className="btn">
+        Edit
+      </button>
+    </>
+  );
+
+  const formArea = (
+    <form onSubmit={handleSubmit}>
+      <p className="required-note">
+        Fields marked <span className="asterisk">*</span> are required
+      </p>
+      
+      <GeneralInfo handleChange={handleControlChange} data={userData} />
+      <Education handleChange={handleControlChange} data={userData} />
+      <Experience handleChange={handleControlChange} data={userData} />
+
+      <button type="submit" className="btn">
+        Generate
+      </button>
+    </form>
+  );
 
   return (
     <>
@@ -56,40 +82,8 @@ function App() {
         <h1>CV Generator</h1>
       </header>
       <main>
-        {status === "submitted" && (
-          <>
-            <PreviewPrevSection
-              theme="General Information"
-              data={generalData}
-            />
-
-            <PreviewPrevSection
-              theme="Education Experience"
-              data={educationData}
-            />
-
-            <PreviewPrevSection
-              theme="Practical Experience"
-              data={experienceData}
-            />
-
-            <button onClick={handleEdit} className="btn">
-              Edit
-            </button>
-          </>
-        )}
-
-        {status === "filling" && (
-          <form onSubmit={handleSubmit}>
-            <GeneralInfo handleChange={handleControlChange} data={userData} />
-            <Education handleChange={handleControlChange} data={userData} />
-            <Experience handleChange={handleControlChange} data={userData} />
-
-            <button type="submit" className="btn">
-              Generate
-            </button>
-          </form>
-        )}
+        {status === "submitted" && previewArea}
+        {status === "filling" && formArea}
       </main>
       <footer></footer>
     </>

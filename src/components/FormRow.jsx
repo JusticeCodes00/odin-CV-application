@@ -2,13 +2,15 @@ function FormRow({ data, handleChange, controlID, controlType, labelText }) {
   const isTextarea = controlType === "textarea";
 
   function handleControlChange(e) {
-    data[controlID] = e.target.value;
-    handleChange({ ...data });
+    handleChange({ ...data, [controlID]: e.target.value });
   }
 
   return (
     <div className="form-row">
-      <label htmlFor={controlID}>{labelText}: </label>
+      <label htmlFor={controlID}>
+        {labelText}
+        <span className="asterisk">*</span>
+      </label>
 
       {isTextarea && (
         <textarea

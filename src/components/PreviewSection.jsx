@@ -1,6 +1,6 @@
 function PreviewPrevSection({ theme, data }) {
   return (
-    <section>
+    <section className="preview-section">
       <h2>{theme}</h2>
       {data.map(({ id, label, value }) => (
         <p key={id}>

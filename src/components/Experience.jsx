@@ -1,10 +1,13 @@
 import "../styles/Experience.css";
+import Bracket from "./Bracket.jsx";
 import FormRow from "./FormRow.jsx";
 
 function Experience({ handleChange, data }) {
   return (
     <fieldset>
-      <legend>[Practical Experiences]</legend>
+      <legend>
+        <Bracket />Practical Experiences<Bracket position="left" />
+      </legend>
 
       <FormRow
         data={data}
@@ -26,7 +29,7 @@ function Experience({ handleChange, data }) {
         data={data}
         handleChange={handleChange}
         controlID="responsibilities"
-        labelText="responsibilities"
+        labelText="Responsibilities"
         controlType="textarea"
       />
 

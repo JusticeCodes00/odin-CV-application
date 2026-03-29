@@ -1,10 +1,13 @@
 import "../styles/GeneralInfo.css";
 import FormRow from "./FormRow.jsx";
+import Bracket from "./Bracket.jsx";
 
 function GeneralInfo({ handleChange, data }) {
   return (
     <fieldset>
-      <legend>[General Information]</legend>
+      <legend>
+        <Bracket />General Information<Bracket position="left" />
+      </legend>
 
       <FormRow
         data={data}

@@ -1,10 +1,13 @@
 import "../styles/Education.css";
+import Bracket from "./Bracket.jsx";
 
 import FormRow from "./FormRow.jsx";
 function Education({ handleChange, data }) {
   return (
     <fieldset>
-      <legend>[Education Experiences]</legend>
+      <legend>
+        <Bracket />Education Experiences<Bracket position="left" />
+      </legend>
 
       <FormRow
         data={data}
